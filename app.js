@@ -10,7 +10,7 @@ const dotenv = require('dotenv');
 const { connectDb } = require('./config/db');
 
 dotenv.config();
-require('./config/passport-setup');  // Google OAuth setup
+require('./config/passport-setup');  // Ensure this file exists
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -23,7 +23,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // MongoDB Connection
-connectDb();
+connectDb()
+  .then(() => console.log("Connected to MongoDB"))
+  .catch(err => console.log("MongoDB connection error:", err));
+
 // Routes
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
