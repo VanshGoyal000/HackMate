@@ -8,6 +8,7 @@ const profileRoutes = require('./routes/profileRoute');
 const hackathonRoutes = require('./routes/hackathonRoute');
 const dotenv = require('dotenv');
 const { connectDb } = require('./config/db');
+const path = require('path')
 
 dotenv.config();
 require('./config/passport-setup');  // Ensure this file exists
