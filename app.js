@@ -13,6 +13,7 @@ dotenv.config();
 require('./config/passport-setup');  // Ensure this file exists
 
 const app = express();
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Middleware
