@@ -1,3 +1,15 @@
-<h2>Hello, <%= user.name %>!</h2>
-<p>Your bio: <%= user.bio || "Add a bio!" %></p>
-<a href="/auth/logout">Logout</a>
+<h1>Profile</h1>
+
+<p>Email: <%= user.email %></p>
+<p>Name: <%= user.name %></p>
+<p>Bio: <%= user.bio %></p>
+
+<form action="/profile/update" method="POST">
+  <label for="name">Name:</label>
+  <input type="text" name="name" value="<%= user.name %>">
+  
+  <label for="bio">Bio:</label>
+  <input type="text" name="bio" value="<%= user.bio %>">
+
+  <button type="submit">Update Profile</button>
+</form>

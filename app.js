@@ -36,5 +36,10 @@ app.use('/hackathons', hackathonRoutes);
 
 app.get('/', (req, res) => res.render('index.ejs'));
 
+
+// app.get('/profile', authRoutes.verifyToken, (req, res) => {
+//   res.send("This is a protected profile page.");
+// });
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
