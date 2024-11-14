@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Me as Mate</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Add Yourself as a Mate</h1>
+
+    <form action="/mate/add" method="POST" class="add-mate-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="github">GitHub URL:</label>
+      <input type="url" id="github" name="github">
+
+      <label for="linkedin">LinkedIn URL:</label>
+      <input type="url" id="linkedin" name="linkedin">
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="skills">Skills (comma-separated):</label>
+      <input type="text" id="skills" name="skills" required>
+
+      <label for="shortAchievement">Short Achievement:</label>
+      <input type="text" id="shortAchievement" name="shortAchievement">
+
+      <label for="bio">Bio:</label>
+      <textarea id="bio" name="bio" rows="3"></textarea>
+
+      <button type="submit">Add Me as Mate</button>
+    </form>
+  </div>
+</body>
+</html>

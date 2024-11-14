@@ -1,5 +1,51 @@
-body { font-family: Arial, sans-serif; }
-h1, h2 { color: #333; }
-form { margin: 20px 0; }
-input, textarea { margin: 5px 0; padding: 10px; width: 100%; }
-button { background-color: #4CAF50; color: white; padding: 10px 20px; }
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  input, textarea, button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  button {
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #218838;
+  }
+  
+  .mates-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .mates-list li {
+    background: white;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .mates-list h2 {
+    margin: 0 0 10px;
+  }
+  

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .user-result {
+      padding: 10px;
+      border: 1px solid #ddd;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Search Profiles</h2>
+  <input type="text" id="searchQuery" placeholder="Enter skills, name, or bio keywords..." />
+  <button onclick="searchProfiles()">Search</button>
+
+  <div id="results"></div>
+
+  <script>
+    async function searchProfiles() {
+      const query = document.getElementById('searchQuery').value;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = ''; // Clear previous results
+
+      try {
+        const response = await fetch('/profile/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ query }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Search request failed');
+        }
+
+        const data = await response.json();
+        const users = data.users;
+
+        if (users.length === 0) {
+          resultsDiv.innerHTML = '<p>No results found.</p>';
+          return;
+        }
+
+        users.forEach(user => {
+          const userDiv = document.createElement('div');
+          userDiv.className = 'user-result';
+          userDiv.innerHTML = `
+            <h3>${user.name}</h3>
+            <p><strong>Skills:</strong> ${user.skills.join(', ')}</p>
+            <p><strong>Bio:</strong> ${user.bio}</p>
+          `;
+          resultsDiv.appendChild(userDiv);
+        });
+      } catch (error) {
+        resultsDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>

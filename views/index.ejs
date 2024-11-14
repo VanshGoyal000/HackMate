@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="/css/styles.css">
-  <title>Home</title>
+  <meta charset="UTF-8">
+  <title>Find Your Mate</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <h1>Welcome to the UniMatch Platform</h1>
-  <p>
-    <a href="/auth/register">  Register</a> or <a href="/auth/login">Login</a> 
-    <a href="/profile">View Profile</a>
-  </p>
-  <a href="/hackathons">View Hackathons</a>
+  <div class="container">
+    <h1>Find Your Perfect Mate for Projects!</h1>
+
+    <!-- Search form -->
+    <form action="/mate/search" method="POST" class="search-form">
+      <input type="text" name="query" placeholder="Search by skills, name, etc." required>
+      <button type="submit">Search</button>
+    </form>
+
+    <button onclick="location.href='/mate/add-form'" class="add-mate-btn">Add Me as Mate</button>
+
+    <!-- Mates list -->
+    <div class="mates-list">
+      <% if (mates.length > 0) { %>
+        <ul>
+          <% mates.forEach(mate => { %>
+            <li class="mate-item">
+              <h2><%= mate.name %></h2>
+              <p>Bio: <%= mate.bio %></p>
+              <p>Skills: <%= mate.skills.join(', ') %></p>
+              <p>Short Achievement: <%= mate.shortAchievement %></p>
+              <p>Email: <%= mate.email %></p>
+              <a href="<%= mate.github %>">GitHub</a> | 
+              <a href="<%= mate.linkedin %>">LinkedIn</a>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>No mates found. Try a different search!</p>
+      <% } %>
+    </div>
+  </div>
 </body>
 </html>

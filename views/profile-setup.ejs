@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Profile - HackMate</title>
+    <style>
+        /* Include the same base styles as register.ejs */
+        .step-indicator {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .step-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .skill-tag {
+            background: #e3f2fd;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="step-indicator">Step <%= currentStep %> of 5</div>
+        <h2 class="step-title"><%= stepTitle %></h2>
+        
+        <form action="/profile/setup/<%= currentStep %>" method="POST">
+            <% if (currentStep === 1) { %>
+                <div class="form-group">
+                    <label for="name">What's your name?</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+            <% } else if (currentStep === 2) { %>
+                <div class="form-group">
+                    <label for="github">GitHub Profile</label>
+                    <input type="url" id="github" name="github" placeholder="https://github.com/yourusername">
+                </div>
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn Profile</label>
+                    <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourusername">
+                </div>
+            <% } else if (currentStep === 3) { %>
+                <div class="form-group">
+                    <label for="skills">Your Skills (comma-separated)</label>
+                    <input type="text" id="skills" name="skills" placeholder="Python, JavaScript, React, Machine Learning">
+                </div>
+                <div class="form-group">
+                    <label for="achievement">Best Achievement</label>
+                    <textarea id="achievement" name="achievement" placeholder="Tell us about your proudest tech achievement"></textarea>
+                </div>
+            <% } else if (currentStep === 4) { %>
+                <div class="form-group">
+                    <label for="bio">About You</label>
+                    <textarea id="bio" name="bio" placeholder="Tell us about yourself, your interests, and what you're looking for"></textarea>
+                </div>
+            <% } else if (currentStep === 5) { %>
+                <div class="form-group">
+                    <label for="projectTitle">Project Title</label>
+                    <input type="text" id="projectTitle" name="projectTitle">
+                </div>
+                <div class="form-group">
+                    <label for="projectDescription">Project Description</label>
+                    <textarea id="projectDescription" name="projectDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="techStack">Tech Stack Used (comma-separated)</label>
+                    <input type="text" id="techStack" name="techStack">
+                </div>
+            <% } %>
+            
+            <button type="submit"><%= currentStep === 5 ? 'Complete Setup' : 'Next Step' %></button>
+        </form>
+    </div>
+</body>
+</html>

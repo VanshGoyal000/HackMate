@@ -12,23 +12,62 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  otp: {
-    code: String,
-    expiresAt: Date,
-  },
   isVerified: {
     type: Boolean,
     default: false,
   },
-});
+  otp: {
+    code: String,
+    expiresAt: Date,
+  },
+  profileComplete: {
+    type: Boolean,
+    default: false,
+  },
+  currentSetupStep: {
+    type: Number,
+    default: 1,
+  },
+  profile: {
+    name: String,
+    avatar: String,
+    bio: String,
+    linkedin: String,
+    github: String,
+    bestAchievement: String,
+    projects: [{
+      title: String,
+      description: String,
+      techStack: [String],
+      link: String,
+    }],
+    skills: [String],
+    interests: [String],
+    lookingFor: [String],
+    mindset: String,
+    availability: {
+      type: String,
+      enum: ['Available', 'Busy', 'Open to opportunities'],
+      default: 'Available',
+    },
+    preferredRoles: [String],
+  },
+  // For AI matching
+  matchingScore: {
+    type: Map,
+    of: Number,
+  },
+}, { timestamps: true });
 
-// Hash password before saving user
-userSchema.pre('save', async function (next) {
-  if (this.isModified('password')) {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
+// Hash password before saving
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  this.password = await bcrypt.hash(this.password, 10);
   next();
 });
+userSchema.methods.comparePassword = function(candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
+};
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+
+module.exports = mongoose.model('User', userSchema);
